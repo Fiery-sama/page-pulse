@@ -38,9 +38,11 @@ export default function AuditDashboard({ onComplete, onError, error }: Props) {
     addLog(bypassCache ? 'Cache bypass: ON' : 'Cache bypass: OFF');
 
     try {
-      addLog('Sending POST /api/v1/audit …');
+      const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+      const endpoint = `${apiBase}/api/v1/audit`;
+      addLog(`Sending POST ${endpoint} …`);
       const start = performance.now();
-      const res = await fetch('/api/v1/audit', {
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: trimmed, bypassCache }),
@@ -48,6 +50,21 @@ export default function AuditDashboard({ onComplete, onError, error }: Props) {
 
       const elapsed = Math.round(performance.now() - start);
       const requestId = res.headers.get('X-Request-ID') ?? '';
+
+      const contentType = res.headers.get('content-type') || '';
+      if (!contentType.includes('application/json')) {
+        addLog(`❌ Server returned non-JSON response (${res.status}): API endpoint not found.`);
+        onError({
+          success: false,
+          error: {
+            code: 'API_URL_NOT_CONFIGURED',
+            message: `Could not connect to the API server (${res.status}). If deployed on Vercel/Netlify, make sure you added the VITE_API_URL environment variable in your Vercel Project Settings pointing to your live Render backend (e.g. https://your-backend.onrender.com).`,
+            timestamp: new Date().toISOString(),
+          },
+        });
+        return;
+      }
+
       const body = await res.json();
 
       if (!res.ok) {
