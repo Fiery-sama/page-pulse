@@ -1233,14 +1233,19 @@ p {
   }
 
   .nav-tabs {
-    gap: 4px;
-    padding: 4px;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 6px;
+    overflow-x: visible;
   }
 
   .nav-tab {
-    padding: 12px 14px;
+    flex: 1 1 calc(50% - 6px);
+    min-width: calc(50% - 6px);
+    padding: 10px 12px;
     font-size: 0.82rem;
-    min-width: 110px;
+    white-space: normal;
+    text-align: center;
   }
 
   .url-input-bar {
@@ -1272,6 +1277,11 @@ p {
 }
 
 @media (max-width: 480px) {
+  .nav-tab {
+    flex: 1 1 100%;
+    min-width: 100%;
+  }
+
   .score-gauges {
     grid-template-columns: 1fr;
   }
