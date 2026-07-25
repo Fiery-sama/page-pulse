@@ -82,7 +82,7 @@ async function handleAudit(
 auditRouter.post('/audit', rateLimiterMiddleware, async (req, res, next) => {
   try {
     const { url, bypassCache = false } = req.body ?? {};
-    const result = await handleAudit(url, !!bypassCache, req.id);
+    const result = await handleAudit(url, !!bypassCache, String(req.id ?? ''));
     res.json(result);
   } catch (err) {
     next(err);
@@ -93,7 +93,7 @@ auditRouter.post('/audit', rateLimiterMiddleware, async (req, res, next) => {
 auditRouter.get('/audit', rateLimiterMiddleware, async (req, res, next) => {
   try {
     const { url, bypassCache } = req.query;
-    const result = await handleAudit(url, bypassCache === 'true', req.id);
+    const result = await handleAudit(url, bypassCache === 'true', String(req.id ?? ''));
     res.json(result);
   } catch (err) {
     next(err);

@@ -62,7 +62,7 @@ function computeGrade(score: number): string {
 
 // ── Pillar auditors ─────────────────────────────────────────────────────────
 
-function auditSeo($: cheerio.CheerioAPI, url: string): PillarScore {
+function auditSeo($: cheerio.CheerioAPI, _url: string): PillarScore {
   const findings: Finding[] = [];
 
   // Title
@@ -336,7 +336,7 @@ export async function runAudit(url: string): Promise<AuditReport> {
 
       // Normalise response headers into a plain object
       const headers: Record<string, string> = {};
-      response.headers.forEach((value, key) => {
+      response.headers.forEach((value: string, key: string) => {
         headers[key.toLowerCase()] = value;
       });
 

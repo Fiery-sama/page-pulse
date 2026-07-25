@@ -19,7 +19,7 @@ export class AppError extends Error {
     this.code = code;
     this.details = details;
     // Maintain proper stack trace (V8 engines)
-    Error.captureStackTrace?.(this, AppError);
+    (Error as any).captureStackTrace?.(this, AppError);
   }
 }
 
