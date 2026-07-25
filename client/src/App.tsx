@@ -102,7 +102,7 @@ export default function App() {
         <div className="header-badge-wrapper">
           <div className="badge-editorial">
             <span className="badge-dot" />
-            <span>Digital Heroes · Audit Engine // v2.4</span>
+            <span>Digital Heroes · Audit Engine // v1.0</span>
           </div>
         </div>
         <div className="app-logo">
