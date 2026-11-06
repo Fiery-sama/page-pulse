@@ -214,7 +214,3 @@ page-pulse/
 ## 📄 License
 
 MIT
-
----
-
-> Built for [Digital Heroes Training Task](https://digitalheroesco.com)
