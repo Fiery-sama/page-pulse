@@ -1,7 +1,5 @@
 # 🔬 Page Pulse — Production-Grade URL Audit Service
 
-> **Built for [Digital Heroes Training Task](https://digitalheroesco.com)**
-
 A high-performance, production-grade URL audit service that analyzes web pages across **SEO**, **Performance**, **Security**, and **Accessibility** pillars — featuring structured error handling, SSRF protection, configurable caching, rate limiting, concurrency control, and a comprehensive test suite.
 
 ---
